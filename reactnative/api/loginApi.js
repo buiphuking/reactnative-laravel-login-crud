@@ -10,14 +10,10 @@ const loginApi = {
     })
       .then(res => res.json())
       .then(resData => {
-        // if (resData.status == 200) {
-        //   setLogin(true);
-        // }
-
-        alert(resData.message);
-        return resData.status;
-        // console.log(resData);
-        // console.log(login);
+        if (resData.token !== undefined && resData.token !== null) {
+          // setLogin(true);
+        }
+        // alert(resData.token);
       });
   }),
 };

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helper\UserService;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -49,6 +52,38 @@ class UserController extends Controller
             );
         }
 
+      
 
     }
+
+      public function token(Request $request)
+    {
+         $loginDetails = $request->only('mssv', 'password');
+
+        if(Auth::attempt($loginDetails)){
+            $user =  User::where("mssv", $request->mssv)->first();
+            return response()->json(['user' => $user, 'token' => $user->createToken($user->mssv)->plainTextToken]);
+        }else{
+            return response()->json(
+                [
+                    'message'=>'wrong login details',
+                    'status'=>501
+                ]
+            );
+        }
+    }
+
+    // public function profile(Request $request)
+    // {
+    //     return response()->json(['user' => $request->user()]);
+    // }
+
+    // public function refresh(Request $request)
+    // {
+    //     $user = $request->user();
+
+    //     $user->tokens()->delete();
+
+    //     return response()->json(['token' => $user->createToken($user->name)->plainTextToken]);
+    // }
 }
