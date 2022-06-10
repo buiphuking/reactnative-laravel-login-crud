@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 // import loginApi from '../../api/loginApi';
 
 export const getLogin = createAsyncThunk('user/login', async () => {
-  await fetch('http://192.168.1.3:8000/api/token', {
+  await fetch('http://192.168.1.2:8000/api/token', {
     method: 'POST',
     headers: {
       Accept: 'application/json',

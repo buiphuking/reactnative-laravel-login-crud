@@ -1,5 +1,4 @@
-const loginApi = {
-  getLogin: (myfunction = async () => {
+const loginApi =  (mssv, password) => {
     await fetch('http://192.168.1.3:8000/api/login', {
       method: 'POST',
       headers: {
@@ -15,6 +14,5 @@ const loginApi = {
         }
         // alert(resData.token);
       });
-  }),
 };
 export default loginApi;
